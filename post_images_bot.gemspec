@@ -3,10 +3,10 @@
 
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'post-images-bot/version'
+require 'post_images_bot/version'
 
 Gem::Specification.new do |spec|
-  spec.name     = 'post-images-bot'
+  spec.name     = 'post_images_bot'
   spec.version  = PostImagesBot::VERSION
   spec.authors  = ['Karl-Johan Karlsson']
   spec.email    = ['creideiki@ferretporn.se']
