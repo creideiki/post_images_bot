@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.email    = ['creideiki@ferretporn.se']
   spec.summary	= 'Twitter bot for automatically posting images'
   spec.description = spec.summary
-  spec.homepage    = 'https://github.com/creideiki/post-images-bot'
+  spec.homepage    = 'https://github.com/creideiki/post_images_bot'
   spec.license	= 'GPL-2.0+'
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|

@@ -1,4 +1,4 @@
-# post-images-bot
+# post_images_bot
 
 Twitter bot for posting a series of images, with comments, at set
 intervals.
