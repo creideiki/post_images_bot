@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'post_images_bot/configuration'
+
+config = PostImagesBot::Configuration.new
+
+config.parse_command_line(ARGV)
+
+config.read_configuration
+
+puts config.configuration
