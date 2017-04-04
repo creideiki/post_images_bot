@@ -45,5 +45,19 @@ Post images to Twitter, according to configuration in <file>"
         abort(usage)
       end
     end
+
+    # Virtual accessors for important configuration values
+
+    def last_post
+      @configuration['timing']['last_post']
+    end
+
+    def last_post=(timestamp)
+      @configuration['timing']['last_post'] = timestamp
+    end
+
+    def min_interval
+      @configuration['timing']['min_interval']
+    end
   end
 end

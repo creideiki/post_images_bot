@@ -8,4 +8,7 @@ config.parse_command_line(ARGV)
 
 config.read_configuration
 
-puts config.configuration
+puts config.last_post
+config.last_post = Time.now.to_i
+puts config.last_post
+puts config.configuration.to_yaml
