@@ -5,31 +5,45 @@ module PostImagesBot
   class Configuration
 
     attr_accessor :configuration
+    attr_accessor :parser
 
     def initialize
       @options = {}
       @configuration = {}
+      @parser = OptionParser.new
+    end
+
+    # Usage information from option parser
+    #
+    # Example:
+    #
+    #   abort(usage) unless options[:warehouse]
+
+    def usage
+      @parser.to_s
     end
 
     def parse_command_line(argv)
-      parser = OptionParser.new
-
-      parser.banner = "Usage: #{$PROGRAM_NAME} -c <file>
+      @parser.banner = "Usage: #{$PROGRAM_NAME} -c <file>
 
 Post images to Twitter, according to configuration in <file>"
 
-      parser.separator ''
-      parser.on('-c FILE', '--config FILE',
-                'configuration file', String) { |file|
+      @parser.separator ''
+      @parser.on('-c FILE', '--config FILE',
+                 'configuration file', String) { |file|
                  @options[:config_file] = file }
-      parser.on_tail('-h', '--help', 'display usage information') {
-                      raise ArgumentError }
+      @parser.on_tail('-h', '--help', 'display usage information') {
+        abort(usage) }
 
-      parser.parse!(argv)
+      @parser.parse!(argv)
     end
 
     def read_configuration
-      @configuration = YAML.load_file(@options[:config_file])
+      if @options[:config_file]
+        @configuration = YAML.load_file(@options[:config_file])
+      else
+        abort(usage)
+      end
     end
   end
 end
