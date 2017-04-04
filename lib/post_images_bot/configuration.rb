@@ -46,6 +46,27 @@ Post images to Twitter, according to configuration in <file>"
       end
     end
 
+    # Borrowed from ruby-2.4.1/lib/pstore.rb:save_data_with_atomic_file_rename_strategy
+    def atomic_write(data, filename)
+      temp_filename = "#{filename}.tmp.#{Process.pid}.#{rand 1000000}"
+      temp_file = File.new(temp_filename, File::CREAT|File::EXCL|File::RDWR)
+      begin
+        temp_file.flock(File::LOCK_EX)
+        temp_file.write(data)
+        temp_file.flush
+        File.rename(temp_filename, filename)
+      rescue
+        File.unlink(temp_filename) rescue nil
+        raise
+      ensure
+        temp_file.close
+      end
+    end
+
+    def write_configuration
+      atomic_write(@configuration.to_yaml, @options[:config_file])
+    end
+
     # Virtual accessors for important configuration values
 
     def last_post
