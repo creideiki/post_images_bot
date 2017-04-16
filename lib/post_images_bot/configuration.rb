@@ -84,5 +84,25 @@ Post images to Twitter, according to configuration in <file>"
     def min_interval
       @configuration['timing']['min_interval']
     end
+
+    def consumer_key
+      @configuration['credentials']['consumer_key']
+    end
+
+    def consumer_secret
+      @configuration['credentials']['consumer_secret']
+    end
+
+    def access_token
+      @configuration['credentials']['access_token']
+    end
+
+    def access_secret
+      @configuration['credentials']['access_secret']
+    end
+
+    def images
+      @configuration['images']
+    end
   end
 end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'post_images_bot/configuration'
+require 'post_images_bot'
 
 config = PostImagesBot::Configuration.new
 
@@ -8,7 +8,8 @@ config.parse_command_line(ARGV)
 
 config.read_configuration
 
-puts config.last_post
-config.last_post = Time.now.to_i
-puts config.last_post
-puts config.configuration.to_yaml
+bot = PostImagesBot::PostImagesBot.new(config)
+
+config = bot.run
+
+config.write_configuration
