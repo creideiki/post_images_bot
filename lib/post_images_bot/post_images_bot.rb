@@ -40,6 +40,8 @@ module PostImagesBot
       # thus hasn't been posted.
       image = @configuration.images.find { |i| i['post'].nil? }
 
+      return @configuration unless image
+
       image['post'] = post_image(image['text'], image['file'])
 
       @configuration.last_post = Time.now.to_i
