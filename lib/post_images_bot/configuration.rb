@@ -2,8 +2,9 @@ require 'yaml'
 require 'optparse'
 
 module PostImagesBot
+  # Encapsulates the configuration of the bot, including reading and
+  # writing configuration files.
   class Configuration
-
     attr_accessor :configuration
     attr_accessor :parser
 
@@ -30,10 +31,12 @@ Post images to Twitter, according to configuration in <file>"
 
       @parser.separator ''
       @parser.on('-c FILE', '--config FILE',
-                 'configuration file', String) { |file|
-                 @options[:config_file] = file }
-      @parser.on_tail('-h', '--help', 'display usage information') {
-        abort(usage) }
+                 'configuration file', String) do |file|
+        @options[:config_file] = file
+      end
+      @parser.on_tail('-h', '--help', 'display usage information') do
+        abort(usage)
+      end
 
       @parser.parse!(argv)
     end
@@ -46,10 +49,11 @@ Post images to Twitter, according to configuration in <file>"
       end
     end
 
-    # Borrowed from ruby-2.4.1/lib/pstore.rb:save_data_with_atomic_file_rename_strategy
+    # Borrowed from ruby-2.4.1/lib/pstore.rb:
+    # save_data_with_atomic_file_rename_strategy
     def atomic_write(data, filename)
-      temp_filename = "#{filename}.tmp.#{Process.pid}.#{rand 1000000}"
-      temp_file = File.new(temp_filename, File::CREAT|File::EXCL|File::RDWR)
+      temp_filename = "#{filename}.tmp.#{Process.pid}.#{rand 1_000_000}"
+      temp_file = File.new(temp_filename, File::CREAT | File::EXCL | File::RDWR)
       begin
         temp_file.flock(File::LOCK_EX)
         temp_file.write(data)

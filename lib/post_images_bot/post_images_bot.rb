@@ -1,4 +1,5 @@
 module PostImagesBot
+  # The main bot interface.
   class PostImagesBot
     def initialize(configuration)
       @configuration = configuration
